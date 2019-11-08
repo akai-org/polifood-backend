@@ -2,6 +2,7 @@ const mongoose = require("mongoose")
 
 const detailSchema = new mongoose.Schema({
     description: String,
+    images: [String],
     menu: [
         {
             type: mongoose.Schema.Types.ObjectId,
