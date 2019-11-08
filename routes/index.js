@@ -47,7 +47,7 @@ router.route('/categories')
 
 router.route('/markers')
 .get((req, res) => {
-    const { location, distance, filters } = req.body
+    const { location, distance, categories } = req.body
     let query = {
         location: {
             $near: {
@@ -59,7 +59,7 @@ router.route('/markers')
             }
         }
     }
-    if (filters.length) query.filters = {$in: filters}
+    if (categories.length) query.filters = {$in: categories}
     db.Pin.find(query).populate('filters').populate('details').exec()
     .then(foundData => res.status(200).json({
         status: 'success',
@@ -67,7 +67,6 @@ router.route('/markers')
         data: foundData.map(found => ({
             id: found._id,
             name: found.name,
-            images: found.images,
             address: found.address,
             location: found.location.coordinates,
             categories: found.filters.map(filter => ({id: filter._id, name: filter.name}))
@@ -78,15 +77,15 @@ router.route('/markers')
 .post((req, res) => {
     const newPinDetails = {
         description: req.body.details.description,
+        images: req.body.images,
         menu: req.body.details.menu,
         hours: req.body.details.hours,
-        comments: req.body.details.comments
+        comments: []
     }
     db.Detail.create(newPinDetails)
     .then(createdDetail => {
         const newPin = {
             name: req.body.name,
-            images: req.body.images,
             address: req.body.address,
             location: {
                 coordinates: req.body.location
@@ -107,6 +106,7 @@ router.route('/markers')
                     categories: createdPin.filters.map(obj => obj._id),
                     details: {
                         description: createdDetail.description,
+                        images: createdDetail.images,
                         menu: createdDetail.menu,
                         hours: createdDetail.hours,
                         comments: createdDetail.comments
@@ -135,6 +135,7 @@ router.route('/markers')
 
 // router.route('/comments')
 
-
+router.route('*')
+.all((req, res) => res.status(400).json({status: 'error', message: 'Invalid URL', data: null}))
 
 module.exports = router
