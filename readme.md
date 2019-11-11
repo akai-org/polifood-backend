@@ -52,7 +52,7 @@ output:
 
     {
         "status": "success" || "error",
-        "message": "Already Exist" || "Created" || err,
+        "message": "Already Exists" || "Created" || err,
         "data": {
             "id": String,
             "name": String
