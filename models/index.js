@@ -1,6 +1,3 @@
-const mongoose = require('mongoose')
-mongoose.Promise = Promise
-
 module.exports.Pin = require('./pin')
 module.exports.Detail = require('./detail')
 module.exports.Filter = require('./filter')
