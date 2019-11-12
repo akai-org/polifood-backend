@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const { error, filter, pin, detail, menuItem, comment } = require('./functions')
+const { error, filter, pin, detail, menuItem, comment } = require('../controllers')
 
 router.route('/categories')
 .get(filter.findFilters)

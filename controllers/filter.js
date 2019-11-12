@@ -1,7 +1,7 @@
-const { error, success } = require('./')
-const db = require('../../models')
+const { error, success } = require('./index')
+const db = require('../models')
 
-module.exports.findFilters = (req, res) => {
+exports.findFilters = (req, res) => {
     db.Filter.find()
     .then(foundData => res.status(200).json({
         status: 'success',
@@ -14,7 +14,7 @@ module.exports.findFilters = (req, res) => {
     .catch(err => error.serverError(req, res, err))
 }
 
-module.exports.createFilter = (req, res) => {
+exports.createFilter = (req, res) => {
     const data = req.body
     db.Filter.countDocuments(data)
     .then(count => {
@@ -35,7 +35,7 @@ module.exports.createFilter = (req, res) => {
     .catch(err => error.serverError(req, res, err))
 }
 
-module.exports.deleteFilter = (req, res) => {
+exports.deleteFilter = (req, res) => {
     const id = { _id: req.body.id }
     db.Filter.countDocuments(id)
     .then(count => {
@@ -48,7 +48,7 @@ module.exports.deleteFilter = (req, res) => {
     .catch(err => error.serverError(req, res, err))
 }
 
-module.exports.updateFilter = (req, res) => {
+exports.updateFilter = (req, res) => {
     const id = {_id: req.body.id}
     const change = {name: req.body.name}
     db.Filter.updateOne(id, change)

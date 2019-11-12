@@ -1,7 +1,7 @@
-const { error, success } = require('./')
-const db = require('../../models')
+const { error, success } = require('./index')
+const db = require('../models')
 
-module.exports.findPins = (req, res) => {
+exports.findPins = (req, res) => {
     const { location, distance, categories } = req.body
     let query = {
         location: {
@@ -30,7 +30,7 @@ module.exports.findPins = (req, res) => {
     .catch(err => error.serverError(req, res, err))
 }
 
-module.exports.createPin = (req, res) => {
+exports.createPin = (req, res) => {
     const newPinDetails = {
         description: req.body.details.description,
         images: req.body.images,
@@ -75,7 +75,7 @@ module.exports.createPin = (req, res) => {
     .catch(err => error.serverError(req, res, err))
 }
 
-module.exports.updatePin = (req, res) => {
+exports.updatePin = (req, res) => {
     // Change required ===
     const id = { _id: req.body.id }
     let change = {}
@@ -90,6 +90,6 @@ module.exports.updatePin = (req, res) => {
     .catch(err => error.serverError(req, res, err))
 }
 
-module.exports.deletePin = (req, res) => {
+exports.deletePin = (req, res) => {
     error.notImplemented(req, res)
 }
