@@ -2,9 +2,10 @@ const mongoose = require("mongoose")
 
 const pinSchema = new mongoose.Schema({
     name: String,
+    image: String,
     address: {
         street: String,
-        number: Number
+        number: String
     },
     location: {
         type: {type: String, default: 'Point'},

@@ -134,6 +134,7 @@ input:
             "street": String,
             "number": String
         },
+        "image": String,
         "location": [Number, Number],
         "categories": String[], // category ids
         "details": {
@@ -186,6 +187,7 @@ output:
                 "street": String,
                 "number": String
             },
+            "image": String,
             "location": [Number, Number],
             "categories": String[], // category ids
             "details": {
