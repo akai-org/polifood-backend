@@ -58,32 +58,11 @@ exports.createPin = (req, res) => {
     if (!req.body.details.images) throw "Details-Images";
     if (!req.body.details.menu) throw "Details-Menu";
     if (!req.body.details.hours) throw "Details-Hours";
-    if (!req.body.details.hours.monday) throw "Details-Hours-Monday";
-    if (!req.body.details.hours.monday.from) throw "Details-Hours-Monday-From";
-    if (!req.body.details.hours.monday.to) throw "Details-Hours-Monday-To";
-    if (!req.body.details.hours.tuesday) throw "Details-Hours-Tuesday";
-    if (!req.body.details.hours.tuesday.from)
-      throw "Details-Hours-Tuesday-From";
-    if (!req.body.details.hours.tuesday.to) throw "Details-Hours-Tuesday-To";
-    if (!req.body.details.hours.wednesday) throw "Details-Hours-Wednesday";
-    if (!req.body.details.hours.wednesday.from)
-      throw "Details-Hours-Wednesday-From";
-    if (!req.body.details.hours.wednesday.to)
-      throw "Details-Hours-Wednesday-To";
-    if (!req.body.details.hours.thursday) throw "Details-Hours-Thursday";
-    if (!req.body.details.hours.thursday.from)
-      throw "Details-Hours-Thursday-From";
-    if (!req.body.details.hours.thursday.to) throw "Details-Hours-Thursday-To";
-    if (!req.body.details.hours.friday) throw "Details-Hours-Friday";
-    if (!req.body.details.hours.friday.from) throw "Details-Hours-Friday-From";
-    if (!req.body.details.hours.friday.to) throw "Details-Hours-Friday-To";
-    if (!req.body.details.hours.saturday) throw "Details-Hours-Saturday";
-    if (!req.body.details.hours.saturday.from)
-      throw "Details-Hours-Saturday-From";
-    if (!req.body.details.hours.saturday.to) throw "Details-Hours-Saturday-To";
-    if (!req.body.details.hours.sunday) throw "Details-Hours-Sunday";
-    if (!req.body.details.hours.sunday.from) throw "Details-Hours-Sunday-From";
-    if (!req.body.details.hours.sunday.to) throw "Details-Hours-Sunday-To";
+    for (const el of ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']){
+      if (!req.body.details.hours[el]) throw `Details-Hours-${el.charAt(0).toUpperCase() + el.slice(1)}`;
+      if (!req.body.details.hours[el].from) throw `Details-Hours-${el.charAt(0).toUpperCase() + el.slice(1)}-From`;
+      if (!req.body.details.hours[el].to) throw `Details-Hours-${el.charAt(0).toUpperCase() + el.slice(1)}-To`;
+    }
   } catch (err) {
     return error.invalidInput(req, res, `${err} field missing!`);
   }
