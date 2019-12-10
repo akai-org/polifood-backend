@@ -2,6 +2,7 @@ const mongoose = require("mongoose")
 
 const pinSchema = new mongoose.Schema({
     name: String,
+    image: String,
     address: {
         street: String,
         number: Number
