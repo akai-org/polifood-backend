@@ -5,7 +5,7 @@ const pinSchema = new mongoose.Schema({
     image: String,
     address: {
         street: String,
-        number: Number
+        number: String
     },
     location: {
         type: {type: String, default: 'Point'},
