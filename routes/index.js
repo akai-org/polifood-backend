@@ -12,11 +12,11 @@ router.route('/categories')
 router.route('/markers')
 .get(pin.findPins)
 .post(pin.createPin)
-.delete(pin.deletePin) // To be implemented
+.delete(pin.deletePin)
 .put(pin.updatePin)
 
 router.route('/details')
-.get(detail.findDetail) // To be implemented
+.get(detail.findDetail)
 .put(detail.updateDetail) // To be implemented
 
 router.route('/menu-items')
